@@ -1,0 +1,309 @@
+WindowManager:
+    Home:
+    Menu:
+    Incubator:
+    Queen:
+    Storage:
+
+<Home>:
+    name: "Home"
+
+	FloatLayout:
+
+        orientation: "vertical"
+
+        Button:
+            text: "You should not see this"
+            size_hint: .45, 0.30
+            pos_hint: {'center_x': 0.5, 'y': 0.15}
+            on_release:
+                root.setAnt()
+                root.updateCounters()
+
+        Image:
+            source: "images/anthill_surface.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
+
+        Label:
+            id: ant_count
+            text: '1'
+            size_hint: .34, 1
+            pos_hint: {'x':0, 'top': 1.45}
+
+        Label:
+            id: food_count
+            text: "2"
+            size_hint: .34, 1
+            pos_hint: {'x':.33, 'top': 1.45}
+
+        Label:
+            id: egg_count
+            text: "3"
+            size_hint: .33, 1
+            pos_hint: {'right':1, 'top': 1.45}
+
+        # Button to go underground
+        Button:
+            text: "v\nv"
+            size_hint: .25, .05
+            pos_hint: {'center_x': 0.5}
+            on_release:
+                root.updateCounters()
+				root.manager.transition.direction = 'up'
+				root.manager.transition.duration = 1
+				root.manager.current = 'Menu'
+		    background_color: 1, 0, 1, 1
+
+<Menu>:
+    name: "Menu"
+
+	FloatLayout:
+
+        orientation: "vertical"
+
+        Image:
+            source: "images/anthill_tunnels.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
+
+
+        # Button to go to food room
+        Button:
+            text: "<--"
+            size_hint: .20, .10
+            pos_hint: {'left': 1, 'y': 0.55}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Storage'
+            background_color: 0, 0, 0, 0.3
+
+        # Button to go to Queen
+        Button:
+            text: "<--"
+            size_hint: .30, .10
+            pos_hint: {'left': 1, 'y': 0.07}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Queen'
+            background_color: 0, 0, 0, 0.3
+
+
+        # Button to go to incubator
+        Button:
+            text: "-->"
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.07}
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Incubator'
+            background_color: 0, 0, 0, 0.3
+
+
+        #Button to go to surface
+        Button:
+            text: "^\n^"
+            size_hint: .25, .05
+            pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+            on_release:
+                root.manager.transition.direction = 'down'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Home'
+            background_color: 1, 0, 1, 1
+
+<Queen>:
+    name: "Queen"
+
+    FloatLayout:
+        orientation: "vertical"
+
+        Image:
+            source: "images/QueenInsideKitchen.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
+
+        Label:
+            id: speed_tier
+            text: "TIER: "
+            size_hint: .20, .10
+            pos_hint: {'left': 1, 'y': 0.17}
+
+        Label:
+            id: speed_stage
+            text: "STAGE: "
+            size_hint: .20, .10
+            pos_hint: {'left': 1, 'y': 0.14}
+
+        Label:
+            id: multi_tier
+            text: "TIER: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.17}
+
+        Label:
+            id: multi_stage
+            text: "STAGE: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.14}
+
+        Button:
+            text: "LAX SPEED"
+            size_hint: .50, .15
+            pos_hint: {'left': 1,'bottom': 1}
+            font_size: 50
+            font_name: "fonts/Ant.ttf"
+            on_release:
+                root.queenEggSpeedUpgradeButton()
+                root.updateCounters()
+            background_color: 1, 0, 1, 1
+
+
+        Button:
+            text: "MULTI EGG"
+            size_hint: .50, .15
+            pos_hint: {'right': 1, 'bottom': 1}
+            font_size: 50
+            font_name: "fonts/Ant.ttf"
+            on_release:
+                root.queenMultiplierUpgradeButton()
+                root.updateCounters()
+            background_color: 1, 0, 1, 1
+
+
+        Button:
+            text: "-->"
+            size_hint: .15, .10
+            pos_hint: {'right': 1, 'top': 1}
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Menu'
+            background_color: 1, 0, 1, 1
+
+<Incubator>:
+    name: "Incubator"
+
+    FloatLayout:
+        orientation: "vertical"
+
+        Image:
+            source: "images/Room2p2.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
+
+        Label:
+            id: speed_tier
+            text: "TIER: "
+            size_hint: .20, .10
+            pos_hint: {'left': 1, 'y': 0.17}
+
+        Label:
+            id: speed_stage
+            text: "STAGE: "
+            size_hint: .20, .10
+            pos_hint: {'left': 1, 'y': 0.14}
+
+        Label:
+            id: multi_tier
+            text: "TIER: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.17}
+
+        Label:
+            id: multi_stage
+            text: "STAGE: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.14}
+
+        Button:
+            text: "HATCH SPEED"
+            size_hint: .50, .15
+            pos_hint: {'left': 1, 'bottom': 1}
+            font_size: 45
+            font_name: "fonts/Ant.ttf"
+            on_release:
+                root.incubatorHatchSpeedUpgradeButton()
+                root.updateCounters()
+            background_color: 1, 0, 1, 1
+
+        Button:
+            text: "MULTI HATCH"
+            size_hint: .50, .15
+            pos_hint: {'right': 1, 'bottom': 1}
+            font_size: 45
+            font_name: "fonts/Ant.ttf"
+            on_release:
+                root.incubatorMultiplierUpgradeButton()
+                root.updateCounters()
+            background_color: 1, 0, 1, 1
+
+        Button:
+            text: "<--"
+            size_hint: .15, .10
+            pos_hint: {'left': 1, 'top': 1}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Menu'
+            background_color: 1, 0, 1, 1
+
+<Storage>:
+    name: "Storage"
+
+    FloatLayout:
+        orientation: "vertical"
+
+        Image:
+            source: "images/FoodRoomp2.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
+
+        Label:
+            id: multi_tier
+            text: "TIER: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.17}
+
+        Label:
+            id: multi_stage
+            text: "STAGE: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.14}
+
+        Button:
+            text: "UPGRADE CAP"
+            size_hint: .5, .15
+            pos_hint: {'left': 1, 'bottom': 1}
+            font_size: 45
+            font_name: "fonts/Ant.ttf"
+            on_release: root.foodUpgradeButton()
+            background_color: 1, 0, 1, 1
+
+        Button:
+            text: "MULTI GATHER"
+            size_hint: .50, .15
+            pos_hint: {'right': 1, 'bottom': 1}
+            font_size: 45
+            font_name: "fonts/Ant.ttf"
+            on_release:
+                root.foodMultiplyButton()
+                root.updateCounters()
+            background_color: 1, 0, 1, 1
+
+        Button:
+            text: "-->"
+            size_hint: .15, .10
+            pos_hint: {'right': 1, 'top': 1}
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Menu'
+            background_color: 1, 0, 1, 1
